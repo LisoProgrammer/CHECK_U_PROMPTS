@@ -1,0 +1,44 @@
+# Tarea 08b — Validador: Evaluación de Grado (academic_evaluation)
+
+**Fase:** Procesamiento | **Depende de:** {{T02}}, {{T07}}
+
+**Contexto obligatorio:** lee `docs/PROMPT_BASE.md` antes de empezar. Para más detalle de reglas consulta `docs/PROMPT_MAESTRO.md`.
+
+**Archivos de referencia:** contratos, orquestador y el código existente de modules/ para este tipo
+
+## Prompt
+
+```
+TIPO: academic_evaluation
+
+TAREA: Adapta o completa el módulo de extracción + validación de este tipo
+para que cumpla el contrato de resultados, reutilizando el código existente
+en modules/ cuando sea posible.
+
+- Separa extracción (datos candidatos con confianza) de validación (reglas).
+- Cada regla es independiente y devuelve cumple/no_cumple/no_evaluable con
+  mensaje y evidencia. Sin información suficiente o con baja confianza =>
+  no_evaluable, nunca no_cumple.
+- Clasificación individual: valid / invalid / to_check. Aquí NO se declara
+  inconsistent (eso es validación cruzada). La falta de otros documentos
+  nunca vuelve inválido a este.
+- Decide resubmission_allowed y required_action según los casos A-D:
+  A nueva versión necesaria, B revisión humana, C fuente externa pendiente,
+  D dependencia pendiente.
+- Versiona el conjunto de reglas (validation_version).
+
+ESPECÍFICO DE ESTE TIPO:
+Extrae los datos de la Evaluación de Grado expedida por Banner. Implementa
+solo las reglas académicas que el módulo existente ya defina; no inventes
+requisitos. Lista como preguntas abiertas los que falten por definir.
+
+Pruebas con datos ficticios: válido, incumplimiento confirmado, ilegible,
+corrupto, campos ausentes, baja confianza.
+```
+
+## Criterios de aceptación
+- [ ] Extracción y reglas separadas
+- [ ] Reglas devuelven cumple/no_cumple/no_evaluable
+- [ ] Registrado en el pipeline_registry
+- [ ] Pruebas con datos ficticios pasan
+- [ ] Resumen final con lo realmente verificado frente a lo simulado o pendiente.
